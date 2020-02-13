@@ -16,13 +16,12 @@
         <div class = "container">
             <div class ="row">
                 <div class="col-12 text-center">
-                    <h1>joinus</h1>
+                    <h1>Login</h1>
                     <div class="col-12">
                         {{error}}
                     </div>
                     <form method="POST" action=".">
                         {% csrf_token %}
-
                         <div class="form-group">
                           <label for="username">Username</label>
                           <input
@@ -33,23 +32,11 @@
                             name="username">
                         </div>
                         <div class="form-group">
-                            <label for="usermail">Useremail</label>
-                            <input
-                             type="email"
-                              class="form-control" 
-                              id="useremail" 
-                              aria-describedby="useremail"
-                              name="useremail">
-                          </div>
-                        <div class="form-group">
                           <label for="Password">Password</label>
                           <input type="password" class="form-control" id="password" name="password">
                         </div>
-                        <div class="form-group form-check">
-                            <label for="passwordcheck">Password check</label>
-                            <input type="passwordcheck" class="form-control" id="passwordcheck" name="passwordcheck">
-                        </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        
+                        <button type="submit" class="btn btn-primary">Login</button>
                     </form>
                 </div>
             </div>
