@@ -2,7 +2,7 @@ from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth.hashers import make_password, check_password
 from .models import Fcuser
-
+from .forms import LoginForm
 
 def home(request):
     user_id = request.session.get('user')
@@ -10,33 +10,42 @@ def home(request):
     if user_id:
         fcuser = Fcuser.objects.get(pk=user_id)
         return HttpResponse(fcuser.username)
+        # if not login return 'Home'
     return HttpResponse('Home')
 
+def logout(request):
+    if request.session.get('user'):
+        del(request.session['user'])
+
+    return redirect('/')
+
 def login(request):
-    if request.method == 'GET':    
-        return render(request, 'login.html')
-    elif request.method == 'POST':
-        username = request.POST.get('username',None)
-        password = request.POST.get('password',None)
+    form = LoginForm()
+ 
+    return render(request, 'login.html', {'form':form})
+       # if request.method == 'GET':    
+    #     return render(request, 'login.html')
+    # elif request.method == 'POST':
+    #     username = request.POST.get('username',None)
+    #     password = request.POST.get('password',None)
         
-        res_data = {}
-        if not (username and password):
-            res_data['error'] = 'input all data'
-        else:
-            fcuser = Fcuser.objects.get(username = username)
-            # fcuser = Fcuser.objects.get(username=username)
-            if check_password(password, fcuser.password):
-                request.session['user'] = fcuser.id
-                return redirect('/')    # go root(home)
-                # if passwords correct, login !
-                #  session
-                #  redirect home_site
-                # pass
-            else:
-                res_data['error'] = 'incorrecr password'
+    #     res_data = {}
+    #     if not (username and password):
+    #         res_data['error'] = 'input all data'
+    #     else:
+    #         fcuser = Fcuser.objects.get(username = username)
+    #         # fcuser = Fcuser.objects.get(username=username)
+    #         if check_password(password, fcuser.password):
+    #             request.session['user'] = fcuser.id
+    #             return redirect('/')    # go root(home)
+    #             # if passwords correct, login !
+    #             #  session
+    #             #  redirect home_site
+    #             # pass
+    #         else:
+    #             res_data['error'] = 'incorrecr password'
 
-            return render(request, 'login.html',res_data)
-
+            # return render(request, 'login.html',res_data)
 
 def register(request):
     if request.method == 'GET':
