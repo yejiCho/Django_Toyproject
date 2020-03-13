@@ -52,3 +52,19 @@ class PublisherList(ListView):
     model = Publisher
 
 ```
+
+## 상품목록조회
+
+```
+<!-- {% for product in object_list %} -->
+<!-- {% for product in product_list %}
+{{product.name}}:{{product.price}}
+{% endfor %} -->
+
+```
+
+### django
+
+```
+Built-in tag reference
+```
