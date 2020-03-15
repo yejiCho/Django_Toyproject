@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from fcuser.views import index, RegisterView,LoginView
-from product.views import ProductList
+from product.views import ProductList, ProductCreate
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -24,6 +24,7 @@ urlpatterns = [
     path('register/',RegisterView.as_view()),
     # class 같은 경우에는 as_view해줘야함
     path('login/',LoginView.as_view()),
-    path('product/', ProductList.as_view())
+    path('product/', ProductList.as_view()),
+    path('product/create/',ProductCreate.as_view())
 ]
 
